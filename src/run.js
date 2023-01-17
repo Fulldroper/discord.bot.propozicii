@@ -2,7 +2,6 @@
 (async () => {
   // env configuration
   process.env.NODE_ENV || await require('dotenv').config({ debug: false })
-  console.log(process.env);
   // req discord framework
   const { Client, GatewayIntentBits } = await require('discord.js');  
   // init discord bot && rest obj
