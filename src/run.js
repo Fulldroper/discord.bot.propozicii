@@ -1,5 +1,4 @@
 // aplication runner
-return
 (async () => {
   // env configuration
   process.env.NODE_ENV || await require('dotenv').config({ debug: false })
@@ -59,30 +58,30 @@ return
   // run bot
   bot.login(process.env.TOKEN)
   bot.on("ready", async function () {
-    // add command builder
-    await require("fd-dcc").call(this)
-    // create site
-    require("fd-dsite").call(this)
-    // add desctiption manager
-    await require("fd-desc-changer").call(this)
-    // change bot description
-    this.description = process.env.npm_package_config_description
-    // add and connect to db
-    this.db = new (require("fd-redis-api"))(process.env.REDIS_URL)
-    this.db.onError(this.error)
-    await this.db.connect()
-    // calc count of users
-    this.users_counter = this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)
+    // // add command builder
+    // await require("fd-dcc").call(this)
+    // // create site
+    // require("fd-dsite").call(this)
+    // // add desctiption manager
+    // await require("fd-desc-changer").call(this)
+    // // change bot description
+    // this.description = process.env.npm_package_config_description
+    // // add and connect to db
+    // this.db = new (require("fd-redis-api"))(process.env.REDIS_URL)
+    // this.db.onError(this.error)
+    // await this.db.connect()
+    // // calc count of users
+    // this.users_counter = this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)
     
-    // change bot description
-    this.description = process.env.npm_package_config_description
-    // log statistic
-    this.log(
-      `🚀 Start as ${this.user.tag} at`, new Date,
-      `\n📊 Servers:`,this.guilds.cache.size,` Users:`, this.users_counter || 0,` Commands:`, Object.keys(this.commands).length,
-      `\n📜 Description: \n\t+ ${process.env.npm_package_config_description} \n\t- ${await this.description}`,
-      `\n🗃️  Commands:`, Object.keys(this.commands),
-      this.commands
-    )
+    // // change bot description
+    // this.description = process.env.npm_package_config_description
+    // // log statistic
+    // this.log(
+    //   `🚀 Start as ${this.user.tag} at`, new Date,
+    //   `\n📊 Servers:`,this.guilds.cache.size,` Users:`, this.users_counter || 0,` Commands:`, Object.keys(this.commands).length,
+    //   `\n📜 Description: \n\t+ ${process.env.npm_package_config_description} \n\t- ${await this.description}`,
+    //   `\n🗃️  Commands:`, Object.keys(this.commands),
+    //   this.commands
+    // )
   })
 })()
