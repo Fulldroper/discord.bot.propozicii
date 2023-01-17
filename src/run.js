@@ -44,6 +44,16 @@
       }
     })
   }
+  bot.descriptionBuilder = text => {
+    let description = text
+    for (const m of text.matchAll(/\$[a-z]{1,32}/gm)) {
+      const c = m[0].slice(1)
+      if (_cmds[c]) {
+        _description = _description.replaceAll(m[0],`</${c}:${_cmds[c]}>`)
+      }
+    }
+
+  }
   bot.on("error", bot.error)
   // run bot
   bot.login(process.env.TOKEN)
@@ -62,6 +72,7 @@
     await this.db.connect()
     // calc count of users
     this.users_counter = this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)
+    
     // change bot description
     this.description = process.env.npm_package_config_description
     // log statistic
@@ -69,7 +80,8 @@
       `🚀 Start as ${this.user.tag} at`, new Date,
       `\n📊 Servers:`,this.guilds.cache.size,` Users:`, this.users_counter || 0,` Commands:`, Object.keys(this.commands).length,
       `\n📜 Description: \n\t+ ${process.env.npm_package_config_description} \n\t- ${await this.description}`,
-      `\n🗃️  Commands:`, Object.keys(this.commands)
+      `\n🗃️  Commands:`, Object.keys(this.commands),
+      this.commands
     )
   })
 })()

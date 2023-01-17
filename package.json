@@ -12,7 +12,7 @@
   },
   "config": {
     "git": "dokku@fd-c.cf:propozicii",
-    "description": "discord bot engine",
+    "description": "🇺🇦 Цей бот був спеціально написаний для створення гарних та більш функціональних пропозицій\n- написати пропозицію $offer \nСайт: https://&domain/\nАвтор: https://fulldroper.cf/ ($info)\nДопомога Автору: &donate\n",
     "commands": "src/commands/",
     "domain": "propozicii.ml",
     "donate": "https://send.monobank.ua/jar/8ZacvjUSxv",
