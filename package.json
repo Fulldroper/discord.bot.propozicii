@@ -1,0 +1,39 @@
+{
+  "name": "Пропозиції",
+  "version": "2.0.0",
+  "main": "./src/run.js",
+  "scripts": {
+    "start": "node .",
+    "test": "nodemon --exec npm start",
+    "test:deploy": "nodemon --exec npm run deploy:run",
+    "commit": "git add * && git commit -m upd",
+    "deploy": "npm run commit && git push %npm_package_config_git% master",
+    "deploy:run": "npm run deploy && npm run start"
+  },
+  "config": {
+    "git": "dokku@fd-c.cf:propozicii",
+    "description": "discord bot engine",
+    "commands": "src/commands/",
+    "domain": "propozicii.ml",
+    "donate": "https://send.monobank.ua/jar/8ZacvjUSxv",
+    "telegram": "https://t.me/full_droper",
+    "email": "full_droper@pm.me"
+  },
+  "author": "full_droper <full_droper@pm.me>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "discord.js": "^14.7.1",
+    "fastify": "^4.11.0",
+    "fd-dcc": "^2.1.0",
+    "fd-desc-changer": "^2.0.1",
+    "fd-dsite": "^1.4.3",
+    "fd-importer": "^1.0.1",
+    "fd-redis-api": "^1.0.0",
+    "redis": "^4.5.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  }
+}
