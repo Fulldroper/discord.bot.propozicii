@@ -1,4 +1,5 @@
 // aplication runner
+return
 (async () => {
   // env configuration
   process.env.NODE_ENV || await require('dotenv').config({ debug: false })
