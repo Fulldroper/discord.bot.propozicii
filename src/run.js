@@ -92,7 +92,6 @@
         description_moded = description_moded.replaceAll(t[0], process.env[`npm_package_config_${c}`])
       }
     }
-    console.log(description_moded);
     // change bot description
     // this.description = description_moded.slice(0,400 - 3) + "..."
     // log statistic
