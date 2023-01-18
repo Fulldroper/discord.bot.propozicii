@@ -16,7 +16,7 @@ module.exports.run = async function(interaction) {
   .setTitle(`Інформація про бота`)
   .setURL(`https://${process.env.npm_package_config_domain}/`)
   .setDescription(`${this.description}
-  \n✨ [Автор Бота fd#6297](https://fulldroper.cf/) написати автору </${c}:${this.cmds[c].id}>
+  \n✨ [Автор Бота fd#6297](https://fulldroper.cf/) написати автору </${c}:${this.commands[c].id}>
   \n👥 Наразі обслуговується **${this.users_counter}** користувачів
   \n🌐 Сайт бота [propozicii.ml](https://${process.env.npm_package_config_domain}/)
   \n🚀 [Запросити бота на свій сервер](https://discord.com/api/oauth2/authorize?client_id=${this.user.id}&permissions=8&scope=applications.commands%20bot)
