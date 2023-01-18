@@ -72,14 +72,34 @@
     await this.db.connect()
     // calc count of users
     this.users_counter = this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)
-    
+    // get env description
+    let description_moded = process.env.npm_package_config_description
+    // fetch cmds
+    const moded_cmds = description_moded.matchAll(/\$[a-z]{1,32}/gm)
+    // fetsh envs
+    const moded_var = description_moded.matchAll(/\@[a-z]{1,32}/gm)
+    // replace command
+    for (const t of moded_cmds) {
+      const c = t[0].slice(1)
+      if (this.commands[c]) {
+        description_moded = description_moded.replaceAll(t[0],`</${c}:${this.commands[c].id}>`)
+      }
+    }
+    // replace command
+    for (const t of moded_var) {
+      const c = t[0].slice(1)
+      if (process.env[`npm_package_config_${c}`]) {
+        description_moded = description_moded.replaceAll(t[0], process.env[`npm_package_config_${c}`])
+      }
+    }
+    console.log(description_moded);
     // change bot description
-    this.description = process.env.npm_package_config_description
+    // this.description = description_moded.slice(0,400 - 3) + "..."
     // log statistic
     this.log(
       `🚀 Start as ${this.user.tag} at`, new Date,
       `\n📊 Servers:`,this.guilds.cache.size,` Users:`, this.users_counter || 0,` Commands:`, Object.keys(this.commands).length,
-      `\n📜 Description: \n\t+ ${process.env.npm_package_config_description} \n\t- ${await this.description}`,
+      `\n📜 Description: \n\t+ ${description_moded} \n\t- ${await this.description}`,
       `\n🗃️  Commands:`, Object.keys(this.commands)
     )
   })
