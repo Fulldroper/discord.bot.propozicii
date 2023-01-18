@@ -86,7 +86,7 @@
     this.description = description_moded.slice(0,400 - 3) + "..."
     // log statistic
     this.log(
-      `🚀 Start as ${this.user.tag} at`, new Date,
+      `🚀 Start as ${this.user.tag} at `, new Date,
       `\n📊 Servers:`,this.guilds.cache.size,` Users:`, this.users_counter || 0,` Commands:`, Object.keys(this.commands).length,
       `\n📜 Description: \n\t+ ${description_moded} \n\t- ${await this.description}`,
       `\n🗃️  Commands:`, Object.keys(this.commands)
