@@ -44,16 +44,6 @@
       }
     })
   }
-  bot.descriptionBuilder = text => {
-    let description = text
-    for (const m of text.matchAll(/\$[a-z]{1,32}/gm)) {
-      const c = m[0].slice(1)
-      if (_cmds[c]) {
-        _description = _description.replaceAll(m[0],`</${c}:${_cmds[c]}>`)
-      }
-    }
-
-  }
   bot.on("error", bot.error)
   // run bot
   bot.login(process.env.TOKEN)
