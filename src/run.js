@@ -93,7 +93,7 @@
       }
     }
     // change bot description
-    // this.description = description_moded.slice(0,400 - 3) + "..."
+    this.description = description_moded.slice(0,400 - 3) + "..."
     // log statistic
     this.log(
       `🚀 Start as ${this.user.tag} at`, new Date,
