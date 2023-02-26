@@ -20,6 +20,6 @@
     "fd-desc-changer": "^2.0.4",
     "fd-dsite": "^1.5.1",
     "fd-importer": "^1.1.0",
-    "fd-redis-api": "^1.0.0"
+    "fd-redis-api": "^1.0.2"
   }
 }
