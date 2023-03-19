@@ -127,7 +127,7 @@ module.exports.run = async function(interaction) {
     const webhook = (await channel.channel.createWebhook({
       name: this.user.username,
       avatar: await this.user.avatarURL(),
-    })).url
+    }).catch(e => this.emit('error', e))).url
     // save the channel and alert settings to the database
     await this.db.set(`${this.collection}:${interaction.guildId}`,{
       channel: channel.value,
@@ -149,7 +149,7 @@ module.exports.run = async function(interaction) {
         mention?.value ? `<@&${mention?.value}> (якщо ви бачите тільки цифки, в налаштуванні ролі дозволити згадування)` : "**не встановлено**"
       }`,
       ephemeral: true
-    })
+    }).catch(e => this.emit('error', e))
     return
   } else if (name && !channel) {
     // if a name is provided but no channel is, create a new channel with the provided name
@@ -177,7 +177,7 @@ module.exports.run = async function(interaction) {
           allow: ['SendMessages'],
         },
       ]
-    })
+    }).catch(e => this.emit('error', e))
     // saving tags ids
     let tags = {}
     for (const tag of channel.availableTags) {
@@ -195,7 +195,7 @@ module.exports.run = async function(interaction) {
     const webhook = (await channel.createWebhook({
       name: this.user.username,
       avatar: await this.user.avatarURL(),
-    })).url
+    }).catch(e => this.emit('error', e))).url
     // save the channel and alert settings to the database
     await this.db.set(`${this.collection}:${interaction.guildId}`,{
       channel: channel.id,
@@ -217,11 +217,11 @@ module.exports.run = async function(interaction) {
         mention?.value ? `<@&${mention?.value}> (якщо ви бачите тільки цифки, в налаштуванні ролі дозволити згадування)` : "**не встановлено**"
       }`,
       ephemeral: true
-    })
+    }).catch(e => this.emit('error', e))
     return    
   } else {
     // if neither name nor channel are provided, reply with an error message
-    interaction.reply({ content: 'Не вказано ні один варіант \n`name`- назва нового каналу\n`channel` - існуючий форум\n\n**Для налаштування спробуйте знову** ', ephemeral: true })
+    interaction.reply({ content: 'Не вказано ні один варіант \n`name`- назва нового каналу\n`channel` - існуючий форум\n\n**Для налаштування спробуйте знову** ', ephemeral: true }).catch(e => this.emit('error', e))
     return
   }
 }

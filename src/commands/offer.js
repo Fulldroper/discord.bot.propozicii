@@ -33,7 +33,7 @@ module.exports.run = async function (interaction) {
   let urate = new Date().getTime() - Number(await this.db.obj.get(rate_limit_id) || 0)
   
   if (urate <= rate_limit) {
-    interaction.reply({ content: `Ви використовуєте команду занадто часто, дозволено через **${Math.trunc((rate_limit - urate) / 1000)} сек.**`, ephemeral: true })
+    interaction.reply({ content: `Ви використовуєте команду занадто часто, дозволено через **${Math.trunc((rate_limit - urate) / 1000)} сек.**`, ephemeral: true }).catch(e => this.emit('error', e))
     return
   } else await this.db.obj.set(rate_limit_id, new Date().getTime())
   // check if channel is created
@@ -101,7 +101,7 @@ module.exports.run = async function (interaction) {
     appliedTags: [tags.wait],
     autoArchiveDuration: 10080,
     reason: "Встановлення авто-архівування на 1 тиждень, та додання тегу"
-  })
+  }).catch(e => this.emit('error', e))
   // react on message
   await axios({
     method: 'PUT',
@@ -139,7 +139,7 @@ module.exports.component = async function (interaction) {
   // Check if the user who triggered the interaction has the "Administrator" permission
   if (!interaction.member.permissions.serialize().Administrator) {
     // If not, send a reply indicating that the command is only available to administrators
-    interaction.reply({ content: 'Команда дозволена тільки адміністрації, ви маєте мати право `ADMINISTRATOR`', ephemeral: true })
+    interaction.reply({ content: 'Команда дозволена тільки адміністрації, ви маєте мати право `ADMINISTRATOR`', ephemeral: true }).catch(e => this.emit('error', e))
     return
   }
   // import data from database
@@ -168,12 +168,12 @@ module.exports.component = async function (interaction) {
     username: interaction.meta[2],
     avatarURL: `https://cdn.discordapp.com/avatars/${interaction.meta[2]}/${interaction.message.author.avatar}.png`,
     components: []
-  }) 
+  }).catch(e => this.emit('error', e))
   await thread.edit({
     // archived: true,
     appliedTags: [tags[type]],
     reason: `змінення статусу пропозиції на '${type}' та архівування`
-  })
+  }).catch(e => this.emit('error', e))
   thread.send(`Пропозиція була ${type === 'accept' ?  'прийнята' : 'відхилена'} адміністратором <@${interaction.member.id}>`)
   // alert if can
   if (alert) {
